@@ -28,6 +28,8 @@ modules:
       - type: git
         url: https://gitlab.freedesktop.org/xorg/lib/libxcvt.git
         tag: libxcvt-0.1.3
+    cleanup:
+      - /share/man
 
   # xwayland dep
   - name: libxfont2
@@ -56,6 +58,9 @@ modules:
       - type: git
         url: https://gitlab.freedesktop.org/xorg/xserver.git
         branch: main
+    cleanup:
+      - /share/man
+      - /share/applications
 
   # waywall dep
   - name: luajit
@@ -68,6 +73,8 @@ modules:
       - type: git
         url: https://github.com/LuaJIT/LuaJIT.git
         tag: v2.1
+    cleanup:
+      - /share/man
 
   # waywall runtime dep
   - name: xprop
@@ -77,6 +84,8 @@ modules:
       - type: archive
         url: https://www.x.org/archive/individual/app/xprop-1.2.8.tar.xz
         sha256: d689e2adb7ef7b439f6469b51cda8a7daefc83243854c2a3b8f84d0f029d67ee
+    cleanup:
+      - /share/man
 
   # waywall dep
   - name: spng
@@ -97,6 +106,9 @@ modules:
         tag: "3.4"
       - type: patch
         path: glfw.patch
+    cleanup:
+      - /share/man
+      - /share/doc
 
   - name: waywall
     buildsystem: meson
