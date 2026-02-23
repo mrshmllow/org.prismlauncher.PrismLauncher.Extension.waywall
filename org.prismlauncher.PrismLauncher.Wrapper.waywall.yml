@@ -1,6 +1,7 @@
 id: org.prismlauncher.PrismLauncher.Wrapper.waywall
 runtime: org.prismlauncher.PrismLauncher
-runtime-version: 'master'
+runtime-version: 'test'
+branch: test
 sdk: org.kde.Sdk//6.10
 build-extension: true
 
