@@ -2,14 +2,7 @@ id: org.prismlauncher.PrismLauncher.Wrapper.waywall
 runtime: org.prismlauncher.PrismLauncher
 runtime-version: 'master'
 sdk: org.kde.Sdk//6.10
-# command: waywall
 build-extension: true
-
-finish-args:
-  - --socket=wayland
-  - --device=dri
-  - --share=ipc
-  - --socket=x11
 
 build-options:
   prefix: /app/wrappers/waywall
