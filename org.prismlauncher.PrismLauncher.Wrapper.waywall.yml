@@ -1,0 +1,122 @@
+id: org.prismlauncher.PrismLauncher.Wrapper.waywall
+runtime: org.prismlauncher.PrismLauncher
+runtime-version: 'master'
+sdk: org.kde.Sdk//6.10
+# command: waywall
+build-extension: true
+
+finish-args:
+  - --socket=wayland
+  - --device=dri
+  - --share=ipc
+  - --socket=x11
+
+build-options:
+  prefix: /app/wrappers/waywall
+  prepend-path: /app/wrappers/waywall/bin
+  prepend-pkg-config-path: /app/wrappers/waywall/lib/pkgconfig
+  prepend-ld-library-path: /app/wrappers/waywall/lib
+  env:
+    PKG_CONFIG_PATH: /app/wrappers/waywall/share/pkgconfig
+
+modules:
+  - name: xorgproto
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2025.1.tar.gz
+        sha256: d6f89f65bafb8c9b735e0515882b8a1511e8e864dde5e9513e191629369f2256
+
+  # xwayland dep
+  - name: libfontenc
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://www.x.org/archive/individual/lib/libfontenc-1.1.9.tar.xz
+        sha256: 9d8392705cb10803d5fe1d27d236cbab3f664e26841ce01916bbbe430cf273e2
+
+  # xwayland dep
+  - name: libxcvt
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/xorg/lib/libxcvt.git
+        tag: libxcvt-0.1.3
+
+  # xwayland dep
+  - name: libxfont2
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://www.x.org/archive/individual/lib/libXfont2-2.0.7.tar.xz
+        sha256: 8b7b82fdeba48769b69433e8e3fbb984a5f6bf368b0d5f47abeec49de3e58efb
+
+  # waywall dep
+  - name: xwayland
+    buildsystem: meson
+    config-opts:
+      - -Dxwayland=true
+      - -Dxorg=false
+      - -Ddocs=false
+      - -Ddevel-docs=false
+      - -Dxnest=false
+      - -Dxephyr=false
+      - -Dxvfb=false
+      - -Dlibunwind=false
+      - -Dglx=true
+      - -Dglamor=true
+      - -Dxcsecurity=true
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/xorg/xserver.git
+        branch: main
+
+  # waywall dep
+  - name: luajit
+    no-autogen: true
+    make-args:
+      - PREFIX=/app/wrappers/waywall
+    make-install-args:
+      - PREFIX=/app/wrappers/waywall
+    sources:
+      - type: git
+        url: https://github.com/LuaJIT/LuaJIT.git
+        tag: v2.1
+
+  # waywall runtime dep
+  - name: xprop
+    config-opts:
+      - PREFIX=/app/wrappers/waywall
+    sources:
+      - type: archive
+        url: https://www.x.org/archive/individual/app/xprop-1.2.8.tar.xz
+        sha256: d689e2adb7ef7b439f6469b51cda8a7daefc83243854c2a3b8f84d0f029d67ee
+
+  # waywall dep
+  - name: spng
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://github.com/randy408/libspng.git
+
+  # glfw
+  - name: glfw
+    buildsystem: cmake
+    config-opts:
+      - -DBUILD_SHARED_LIBS=ON
+      - -DGLFW_BUILD_WAYLAND=ON
+    sources:
+      - type: git
+        url: https://github.com/glfw/glfw
+        tag: "3.4"
+      - type: patch
+        path: glfw.patch
+
+  - name: waywall
+    buildsystem: meson
+    post-install:
+      - install -D waywall/waywall ${FLATPAK_DEST}/bin/waywall
+    sources:
+      - type: git
+        url: https://github.com/tesselslate/waywall.git
+        branch: main
