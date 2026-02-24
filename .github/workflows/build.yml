@@ -27,6 +27,10 @@ jobs:
       - name: Generate CNAME
         run: |
           echo "flatter.althaea.zone" > CNAME
+      
+      - name: temporary, install testing prism
+        run: |
+          flatpak install --user https://dl.flathub.org/build-repo/258311/org.prismlauncher.PrismLauncher.flatpakref
 
       - name: Build
         uses: andyholmes/flatter@5edca6dbb040511ddbf4e2f2db927d6ceacaf36c
