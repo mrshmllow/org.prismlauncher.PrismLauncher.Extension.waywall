@@ -1,0 +1,25 @@
+From 7cecdb26e6cdcc806f7555b8d785528cfa782374 Mon Sep 17 00:00:00 2001
+From: marshmallow <git@althaea.zone>
+Date: Tue, 24 Feb 2026 13:27:13 +1100
+Subject: [PATCH] add info log for flatpak sandbox for wayland-0
+
+---
+ waywall/server/backend.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/waywall/server/backend.c b/waywall/server/backend.c
+index edfe6d2..f5fbf0f 100644
+--- a/waywall/server/backend.c
++++ b/waywall/server/backend.c
+@@ -329,7 +329,7 @@ server_backend_create() {
+ 
+     backend->display = wl_display_connect(nullptr);
+     if (!backend->display) {
+-        ww_log_errno(LOG_ERROR, "wl_display_connect failed");
++        ww_log_errno(LOG_ERROR, "org.prismlauncher.PrismLauncher.Wrapper.waywall: please follow instructions at https://github.com/mrshmllow/org.prismlauncher.PrismLauncher.Wrapper.waywall to configure flatpak sandbox overrides required for waywall (wl_display_connect failed)");
+         goto fail_display;
+     }
+     wl_display_set_max_buffer_size(backend->display, MAX_BUFFER_SIZE);
+-- 
+2.52.0
+
