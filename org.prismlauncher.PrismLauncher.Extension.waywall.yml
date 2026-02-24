@@ -6,12 +6,12 @@ sdk: org.kde.Sdk//6.10
 build-extension: true
 
 build-options:
-  prefix: /app/extension/waywall
-  prepend-path: /app/extension/waywall/bin
-  prepend-pkg-config-path: /app/extension/waywall/lib/pkgconfig
-  prepend-ld-library-path: /app/extension/waywall/lib
+  prefix: /app/extensions/waywall
+  prepend-path: /app/extensions/waywall/bin
+  prepend-pkg-config-path: /app/extensions/waywall/lib/pkgconfig
+  prepend-ld-library-path: /app/extensions/waywall/lib
   env:
-    PKG_CONFIG_PATH: /app/extension/waywall/share/pkgconfig
+    PKG_CONFIG_PATH: /app/extensions/waywall/share/pkgconfig
 
 modules:
   # xwayland dep
@@ -73,9 +73,9 @@ modules:
   - name: luajit
     no-autogen: true
     make-args:
-      - PREFIX=/app/extension/waywall
+      - PREFIX=/app/extensions/waywall
     make-install-args:
-      - PREFIX=/app/extension/waywall
+      - PREFIX=/app/extensions/waywall
     sources:
       - type: git
         url: https://github.com/LuaJIT/LuaJIT.git
@@ -87,7 +87,7 @@ modules:
   # waywall runtime dep
   - name: xprop
     config-opts:
-      - PREFIX=/app/extension/waywall
+      - PREFIX=/app/extensions/waywall
     sources:
       - type: archive
         url: https://www.x.org/archive/individual/app/xprop-1.2.8.tar.xz

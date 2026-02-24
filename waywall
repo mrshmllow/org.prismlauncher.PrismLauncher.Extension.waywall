@@ -2,13 +2,13 @@
 
 # vi: ft=sh
 
-export PATH="/app/extension/waywall/bin:$PATH"
-export WAYWALL_XWAYLAND_BINARY="/app/extension/waywall/bin/Xwayland"
-export LD_LIBRARY_PATH="/app/extension/waywall/lib:${LD_LIBRARY_PATH:-}"
+export PATH="/app/extensions/waywall/bin:$PATH"
+export WAYWALL_XWAYLAND_BINARY="/app/extensions/waywall/bin/Xwayland"
+export LD_LIBRARY_PATH="/app/extensions/waywall/lib:${LD_LIBRARY_PATH:-}"
 
 # Minecraft appears to error out if there is no xcursor theme set
 # setting this to "breeze" did not appear to fix the issue
 # only Adwaita did...
 export XCURSOR_THEME="${XCURSOR_THEME:-Adwaita}"
 
-exec -a "$0" /app/extension/waywall/bin/.waywall-unwrapped "$@"
+exec -a "$0" /app/extensions/waywall/bin/.waywall-unwrapped "$@"

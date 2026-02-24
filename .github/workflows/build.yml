@@ -33,7 +33,7 @@ jobs:
       
       - name: temporary, install testing prism
         run: |
-          flatpak install -y --user https://dl.flathub.org/build-repo/258457/org.prismlauncher.PrismLauncher.flatpakref
+          flatpak install -y --user https://dl.flathub.org/build-repo/258545/org.prismlauncher.PrismLauncher.flatpakref
 
       - name: Build
         uses: andyholmes/flatter@5edca6dbb040511ddbf4e2f2db927d6ceacaf36c
