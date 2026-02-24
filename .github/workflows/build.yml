@@ -1,0 +1,50 @@
+name: Flatter (GitHub Pages)
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  flatter:
+    name: Flatter
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/andyholmes/flatter/gnome:master
+      options: --privileged
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Generate a CNAME file in current directory
+      - name: Generate CNAME
+        run: |
+          echo "flatter.althaea.zone" > CNAME
+
+      - name: Build
+        uses: andyholmes/flatter@5edca6dbb040511ddbf4e2f2db927d6ceacaf36c
+        with:
+          files: |
+            org.prismlauncher.PrismLauncher.Wrapper.waywall.yml
+          upload-pages-artifact: true
+          upload-pages-includes: |
+            CNAME
+            default.css
+            index.html
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: flatter
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
