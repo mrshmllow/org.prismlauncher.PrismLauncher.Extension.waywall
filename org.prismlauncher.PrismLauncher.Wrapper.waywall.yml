@@ -1,4 +1,4 @@
-id: org.prismlauncher.PrismLauncher.Wrapper.waywall
+id: org.prismlauncher.PrismLauncher.Extension.waywall
 runtime: org.prismlauncher.PrismLauncher
 runtime-version: 'test'
 branch: test
@@ -6,12 +6,12 @@ sdk: org.kde.Sdk//6.10
 build-extension: true
 
 build-options:
-  prefix: /app/wrappers/waywall
-  prepend-path: /app/wrappers/waywall/bin
-  prepend-pkg-config-path: /app/wrappers/waywall/lib/pkgconfig
-  prepend-ld-library-path: /app/wrappers/waywall/lib
+  prefix: /app/extension/waywall
+  prepend-path: /app/extension/waywall/bin
+  prepend-pkg-config-path: /app/extension/waywall/lib/pkgconfig
+  prepend-ld-library-path: /app/extension/waywall/lib
   env:
-    PKG_CONFIG_PATH: /app/wrappers/waywall/share/pkgconfig
+    PKG_CONFIG_PATH: /app/extension/waywall/share/pkgconfig
 
 modules:
   # xwayland dep
@@ -73,9 +73,9 @@ modules:
   - name: luajit
     no-autogen: true
     make-args:
-      - PREFIX=/app/wrappers/waywall
+      - PREFIX=/app/extension/waywall
     make-install-args:
-      - PREFIX=/app/wrappers/waywall
+      - PREFIX=/app/extension/waywall
     sources:
       - type: git
         url: https://github.com/LuaJIT/LuaJIT.git
@@ -87,7 +87,7 @@ modules:
   # waywall runtime dep
   - name: xprop
     config-opts:
-      - PREFIX=/app/wrappers/waywall
+      - PREFIX=/app/extension/waywall
     sources:
       - type: archive
         url: https://www.x.org/archive/individual/app/xprop-1.2.8.tar.xz
