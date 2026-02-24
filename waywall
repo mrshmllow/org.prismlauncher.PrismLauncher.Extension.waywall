@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# vi: ft=sh
+
+export PATH="/app/wrappers/waywall/bin:$PATH"
+export WAYWALL_XWAYLAND_BINARY="/app/wrappers/waywall/bin/Xwayland"
+export LD_LIBRARY_PATH="/app/wrappers/waywall/lib:${LD_LIBRARY_PATH:-}"
+
+echo "$@"
+
+exec -a "$0" /app/wrappers/waywall/bin/.waywall-unwrapped "$@" -Dorg.lwjgl.glfw.libname=/app/wrappers/waywall/lib/libglfw.so

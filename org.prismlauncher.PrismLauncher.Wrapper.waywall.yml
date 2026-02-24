@@ -114,10 +114,19 @@ modules:
   - name: waywall
     buildsystem: meson
     post-install:
-      - install -D waywall/waywall ${FLATPAK_DEST}/bin/waywall
+      - install -D waywall/waywall ${FLATPAK_DEST}/bin/.waywall-unwrapped
     sources:
       - type: git
         url: https://github.com/tesselslate/waywall.git
         branch: main
       - type: patch
         path: 0001-add-info-log-for-flatpak-sandbox-for-wayland-0.patch
+
+  - name: enhance
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 waywall ${FLATPAK_DEST}/bin/waywall
+      - chmod +x ${FLATPAK_DEST}/bin/waywall
+    sources:
+      - type: file
+        path: waywall
