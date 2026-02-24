@@ -40,7 +40,7 @@ jobs:
         with:
           arch: ${{ matrix.arch }}
           files: |
-            org.prismlauncher.PrismLauncher.Wrapper.waywall.yml
+            org.prismlauncher.PrismLauncher.Extension.waywall.yml
           upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
           upload-pages-includes: |
             CNAME
